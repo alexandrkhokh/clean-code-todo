@@ -16,28 +16,23 @@ const completedTasksList = document.getElementById("completed-tasks"); //complet
 const createTaskListItem = function (taskText) {
   const listItem = document.createElement("li");
 
-  //input (checkbox)
-  const checkbox = document.createElement("input"); //checkbx
-  //label
-  const label = document.createElement("label"); //label
-  //input (text)
-  const editInput = document.createElement("input"); //text
-  //button.edit
-  const editButton = document.createElement("button"); //edit button
+  const checkbox = document.createElement("input");
+  const label = document.createElement("label");
+  const editInput = document.createElement("input");
+  const editButton = document.createElement("button");
 
-  //button.delete
-  const deleteButton = document.createElement("button"); //delete button
-  const deleteIcon = document.createElement("img"); //delete button image
+  const deleteButton = document.createElement("button");
+  const deleteIcon = document.createElement("img");
 
   label.innerText = taskText;
   label.className = "task";
 
-  //Each elements, needs appending
+  //Each element, needs appending
   checkbox.type = "checkbox";
   editInput.type = "text";
   editInput.className = "task";
 
-  editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
+  editButton.innerText = "Edit";
   editButton.className = "edit";
 
   deleteButton.className = "delete";
@@ -114,38 +109,22 @@ const moveToIncomplete = function () {
   bindTaskEvents(listItem, moveToCompleted);
 };
 
-//Set the click handler to the addTask function.
 addButton.addEventListener("click", addTask);
 
 const bindTaskEvents = function (listItem, onCheckboxChange) {
-  //select ListItems children
   const checkbox = listItem.querySelector("input[type=checkbox]");
   const editButton = listItem.querySelector("button.edit");
   const deleteButton = listItem.querySelector("button.delete");
 
-  //Bind editTask to edit button.
   editButton.onclick = toggleEditMode;
-  //Bind deleteTask to delete button.
   deleteButton.onclick = deleteTask;
-  //Bind moveToCompleted to onCheckboxChange.
   checkbox.onchange = onCheckboxChange;
 };
 
-//cycle over incompleteTasksList ul list items
-//for each list item
 for (let i = 0; i < incompleteTasksList.children.length; i++) {
-  //bind events to list items chldren(tasksCompleted)
   bindTaskEvents(incompleteTasksList.children[i], moveToCompleted);
 }
 
-//cycle over completedTasksList ul list items
 for (let i = 0; i < completedTasksList.children.length; i++) {
-  //bind events to list items chldren(tasksIncompleted)
   bindTaskEvents(completedTasksList.children[i], moveToIncomplete);
 }
-
-// Issues with usability don't get seen until they are in front of a human tester.
-
-//prevent creation of empty tasks.
-
-//Change edit to save when you are in edit mode.
